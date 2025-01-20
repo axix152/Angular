@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-roles',
-  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './roles.component.html',
   styleUrl: './roles.component.css',

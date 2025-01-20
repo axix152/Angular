@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-master',
-  standalone: true,
   imports: [RolesComponent, DesignationComponent, CommonModule],
   templateUrl: './master.component.html',
   styleUrl: './master.component.css',

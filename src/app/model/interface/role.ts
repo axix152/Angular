@@ -12,3 +12,5 @@ export interface ApiResponseModel {
   result: boolean;
   data: any;
 }
+
+// interface are created in angular for creating a Strict type of the data shape we are getting as response.
