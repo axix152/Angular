@@ -1,0 +1,186 @@
+<div class="row">
+  <div class="col-8">
+    <div class="card">
+      <div class="card-header bg-success text-white">Client List</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Sr No</th>
+                  <th>Employee Name</th>
+                  <th>Employee Code</th>
+                  <th>Employee Desg</th>
+                  <th>Project Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Client Name</th>
+                  <th colspan="2" class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (item of ClientAllProjectList(); track $index) {
+                <tr>
+                  <td>{{ $index + 1 }}</td>
+                  <td>{{ item?.empName }}</td>
+                  <td>{{ item?.empCode }}</td>
+                  <td>{{ item?.empDesignation }}</td>
+                  <td>{{ item?.projectName }}</td>
+                  <td>{{ item?.startDate | date }}</td>
+                  <td>{{ item?.expectedEndDate | date }}</td>
+                  <td>{{ item?.clientName }}</td>
+                  <td>
+                    <button class="btn btn-primary" (click)="onEdit(item)">
+                      Edit
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-danger"
+                      (click)="onDelete(item.clientProjectId)"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+                }
+              </tbody>
+              @if(ClientAllProjectList.length === 0) {
+              <tbody>
+                <tr>
+                  <td colspan="8" class="text-center">No data found.</td>
+                </tr>
+              </tbody>
+              }
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="card">
+      <div class="card-header bg-success text-white">New Client</div>
+      <div class="card-body">
+        <form [formGroup]="projectForm">
+          <div class="row">
+            <div class="col-6">
+              <label for="">Project Name</label>
+              <input
+                type="text"
+                formControlName="projectName"
+                class="form-control"
+              />
+              @if (projectForm.controls['projectName'].touched) {
+              <div class="text-danger">
+                @if(projectForm.controls['projectName'].errors?.['required']){
+                <span>This is required</span>
+                }
+                @if(projectForm.controls['projectName'].errors?.['minlength']){
+                <span>Min length 4 chars</span>
+                }
+              </div>
+              }
+            </div>
+            <div class="col-6">
+              <label for="">Start Date</label>
+              <input
+                type="date"
+                formControlName="startDate"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Expected End Date</label>
+              <input
+                type="date"
+                formControlName="expectedEndDate"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Contact Name</label>
+              <input
+                type="text"
+                formControlName="contactPerson"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Contact Mobile</label>
+              <input
+                type="text"
+                formControlName="contactPersonContactNo"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Contact Email</label>
+              <input
+                type="text"
+                formControlName="contactPersonEmailId"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Total Employee Count</label>
+              <input
+                type="text"
+                formControlName="totalEmpWorking"
+                class="form-control"
+              />
+            </div>
+            <div class="col-6">
+              <label for="">Project Cost</label>
+              <input
+                type="text"
+                formControlName="projectCost"
+                class="form-control"
+              />
+            </div>
+            <div class="col-12">
+              <label for="">Project Description</label>
+              <textarea
+                formControlName="projectDetails"
+                class="form-control"
+              ></textarea>
+            </div>
+            <div class="col-6">
+              <label for="">Select Client</label>
+              <select formControlName="clientId" class="form-control">
+                <option value="">Select Client</option>
+                @for (item of clientList; track $index) {
+                <option [value]="item.clientId">{{ item.companyName }}</option>
+                }
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="">Lead By</label>
+              <select formControlName="leadByEmpId" class="form-control">
+                <option value="">Select Employee</option>
+                @for (item of employeeList; track $index) {
+                <option [value]="item.empId">
+                  {{ item.empName }}-{{ item.empCode }}
+                </option>
+                }
+              </select>
+            </div>
+            <div class="col-6 pt-3 text-center">
+              <button class="btn btn-secondary">Reset</button>
+            </div>
+            <div class="col-6 text-center pt-3">
+              <button
+                class="btn btn-success"
+                [disabled]="projectForm.invalid"
+                (click)="saveClientProject()"
+              >
+                Create Client
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,18 @@
+<ul>
+  @for (item of userList$ | async; track $index) {
+  <li>{{ item?.username }}</li>
+  }
+</ul>
+
 <div class="row">
   <div class="col-8">
     <div class="card">
-      <div class="card-header bg-success text-white">Client List</div>
+      <div class="card-header bg-success text-white">
+        Client List- {{ firstName() }}
+        <button class="btn bg-danger" (click)="changeSignalValue()">
+          Change Value
+        </button>
+      </div>
       <div class="card-body">
         <div class="row">
           <div class="col-12">
@@ -20,7 +31,7 @@
                 @for (item of clientList; track $index) {
                 <tr>
                   <td>{{ $index + 1 }}</td>
-                  <td>{{ item?.companyName }}</td>
+                  <td>{{ item?.companyName | uppercase }}</td>
                   <td>{{ item?.contactPersonName }}</td>
                   <td>{{ item?.contactNo }}</td>
                   <td>{{ item?.city }}</td>

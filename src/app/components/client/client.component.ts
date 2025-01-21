@@ -1,12 +1,14 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Client } from '../../model/class/client';
 import { FormsModule } from '@angular/forms';
 import { ClientService } from '../../services/client.service';
 import { ApiResponseModel } from '../../model/interface/role';
+import { AsyncPipe, UpperCasePipe } from '@angular/common';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-client',
-  imports: [FormsModule],
+  imports: [FormsModule, UpperCasePipe, AsyncPipe],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',
 })
@@ -18,8 +20,19 @@ export class ClientComponent implements OnInit {
   // inject Client Service
   clientService = inject(ClientService);
 
+  firstName = signal('Hello World');
+
+  // Asynce pipe
+  // for Industry best practice for Observable we use $ in the end of any Observables
+  userList$: Observable<any> = new Observable<any>();
+
   ngOnInit(): void {
     this.loadClient();
+    this.userList$ = this.clientService.getAllUser();
+  }
+
+  changeSignalValue() {
+    this.firstName.set('New Hello to world');
   }
 
   // get all client
