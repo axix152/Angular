@@ -4,6 +4,11 @@
   }
 </ul>
 
+<app-alert
+  [alertType]="'Success'"
+  [message]="'Alert from Client page'"
+></app-alert>
+
 <div class="row">
   <div class="col-8">
     <div class="card">
@@ -175,15 +180,22 @@
               <button class="btn btn-secondary">Reset</button>
             </div>
             <div class="col-6 text-center pt-3">
-              <button
-                class="btn btn-success"
+              <app-my-button
+                [btnClass]="'btn btn-success'"
+                [btnText]="
+                  clientObj.clientId != 0 ? 'Update client' : 'Create Client'
+                "
+                (onBtnClicked)="onSaveClient($event)"
+              ></app-my-button>
+              <!-- <button
+                class=""
                 [disabled]="!form.valid"
                 (click)="onSaveClient()"
               >
                 {{
-                  clientObj.clientId != 0 ? "Update client" : "Create Client"
+                  
                 }}
-              </button>
+              </button> -->
             </div>
           </div>
         </form>

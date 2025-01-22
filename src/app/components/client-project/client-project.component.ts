@@ -14,10 +14,11 @@ import {
 import { Client } from '../../model/class/client';
 import { DatePipe } from '@angular/common';
 import { single } from 'rxjs';
+import { AlertComponent } from '../../reusabaleComponent/alert/alert.component';
 
 @Component({
   selector: 'app-client-project',
-  imports: [ReactiveFormsModule, DatePipe],
+  imports: [ReactiveFormsModule, DatePipe, AlertComponent],
   templateUrl: './client-project.component.html',
   styleUrl: './client-project.component.css',
 })

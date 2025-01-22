@@ -5,10 +5,18 @@ import { ClientService } from '../../services/client.service';
 import { ApiResponseModel } from '../../model/interface/role';
 import { AsyncPipe, UpperCasePipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { AlertComponent } from '../../reusabaleComponent/alert/alert.component';
+import { MyButtonComponent } from '../../reusabaleComponent/my-button/my-button.component';
 
 @Component({
   selector: 'app-client',
-  imports: [FormsModule, UpperCasePipe, AsyncPipe],
+  imports: [
+    FormsModule,
+    UpperCasePipe,
+    AsyncPipe,
+    AlertComponent,
+    MyButtonComponent,
+  ],
   templateUrl: './client.component.html',
   styleUrl: './client.component.css',
 })
@@ -43,7 +51,7 @@ export class ClientComponent implements OnInit {
   }
 
   // method for saving client to database.
-  onSaveClient() {
+  onSaveClient(data: string) {
     this.clientService
       .addUpdate(this.clientObj)
       .subscribe((res: ApiResponseModel) => {
